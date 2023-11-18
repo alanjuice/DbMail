@@ -1,13 +1,17 @@
 const express = require("express");
 const morgan = require("morgan");
-const dbConnect = require("./controllers/mongoConnect");
 
+const dbConnect = require("./controllers/mongoConnect");
 const userRouter = require("./routers/userRouter");
+const mailRouter = require("./routers/mailRouter");
 
 const app = express();
+
+
 app.use(express.json());
 app.use("", userRouter);
-app.use(morgan());
+app.use("", mailRouter);
+app.use(morgan('tiny'));
 
 app.get("/health", (req, res) => {
     res.json({

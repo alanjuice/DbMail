@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const mongoURL = "mongodb+srv://alanjose2025:alan2003@cluster0.2y09nal.mongodb.net/?retryWrites=true&w=majority";
+const mongoURL = 'mongodb://alanjose2025:alan2003@ac-hyowbse-shard-00-00.2y09nal.mongodb.net:27017,ac-hyowbse-shard-00-01.2y09nal.mongodb.net:27017,ac-hyowbse-shard-00-02.2y09nal.mongodb.net:27017/?ssl=true&replicaSet=atlas-13u53v-shard-0&authSource=admin&retryWrites=true&w=majority';
 async function mongoConnect() {
     const response = await mongoose.connect(mongoURL);
 }

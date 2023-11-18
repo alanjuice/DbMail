@@ -1,5 +1,6 @@
 const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 
 async function userLogin(req, res) {
@@ -39,9 +40,11 @@ async function userLogin(req, res) {
             return;
         }
     }
+
+    res.set("x-jtoken", jwt.sign({ id: user._id }, "pkey"))
     res.json({
         status: true,
-        msg: "Login sucess"
+        msg: "Login sucess",
     });
     return;
 }
@@ -98,6 +101,9 @@ async function userRegister(req, res) {
         password: password
     });
     await newUser.save();
+
+    res.set("x-jtoken", jwt.sign({ id: newUser._id }, "pkey"))
+
     res.json({
         status: true,
         msg: "User created"

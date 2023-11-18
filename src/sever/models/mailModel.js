@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 
 module.exports = mongoose.model("Mail", new mongoose.Schema(
     {
-        from: { type: String, required: true },
-        to: { type: String, required: true },
+        from: { type: mongoose.Types.ObjectId, required: true },
+        to: { type: mongoose.Types.ObjectId, required: true },
         body: { type: String, required: true },
         subject: { type: String, required: true },
+        seenByReciever: { type: Boolean }
     }
 ));
