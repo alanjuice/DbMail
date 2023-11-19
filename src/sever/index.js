@@ -13,6 +13,8 @@ app.use("", userRouter);
 app.use("", mailRouter);
 app.use(morgan('tiny'));
 
+app.use(express.static('public'));
+
 app.get("/health", (req, res) => {
     res.json({
         status: true,
