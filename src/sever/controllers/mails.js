@@ -15,10 +15,9 @@ async function sendMail(req, res) {
     if (!user) {
         res.json({
             status: false,
-            msg: "Invalid sender"
+            msg: "Sender doesn't exist"
         })
     }
-
     const newMail = new mailModel({
         from: req.user.id,
         to: user,
@@ -27,6 +26,7 @@ async function sendMail(req, res) {
         seenByReciever: false
     });
     await newMail.save();
+    res.json({ status: true, msg: "Mail sent" })
 }
 
 module.exports = { getMails, sendMail };

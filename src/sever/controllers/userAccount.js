@@ -41,7 +41,7 @@ async function userLogin(req, res) {
         }
     }
 
-    res.set("x-jtoken", jwt.sign({ id: user._id }, "pkey"))
+    res.set("x-jwtoken", jwt.sign({ id: user._id }, "pkey"))
     res.json({
         status: true,
         msg: "Login sucess",
@@ -101,8 +101,6 @@ async function userRegister(req, res) {
         password: password
     });
     await newUser.save();
-
-    res.set("x-jtoken", jwt.sign({ id: newUser._id }, "pkey"))
 
     res.json({
         status: true,

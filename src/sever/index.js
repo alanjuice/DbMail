@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const dbConnect = require("./controllers/mongoConnect");
+const dbConnect = require("./middleware/mongoConnect");
 const userRouter = require("./routers/userRouter");
 const mailRouter = require("./routers/mailRouter");
 
