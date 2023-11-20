@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 function authenticate(req, res, next) {
+    //To protect certain routes where only authorized people can access the protected routes
     const token = req.header("x-jwtoken");
     try {
         const payload = jwt.verify(token, "pkey");

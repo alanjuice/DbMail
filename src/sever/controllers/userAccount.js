@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 
 async function userLogin(req, res) {
-    console.log("Loging in..");
+    //Accepts email and password and responds with a jwt token on successful login
     const { email, password } = req.body;
 
     if (!email) {
@@ -50,7 +50,7 @@ async function userLogin(req, res) {
 }
 
 async function userRegister(req, res) {
-    console.log("Registering..");
+    //Registers the user aka add the user to database after encrypting the password
     var { fname, lname, email, password } = req.body;
     if (!fname) {
         res.json({
