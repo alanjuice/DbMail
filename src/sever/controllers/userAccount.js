@@ -41,7 +41,7 @@ async function userLogin(req, res) {
         }
     }
 
-    res.set("x-jwtoken", jwt.sign({ id: user._id }, "pkey"))
+    res.set("x-jwtoken", jwt.sign({ id: user._id, email: user.email }, "pkey"))
     res.json({
         status: true,
         msg: "Login sucess",

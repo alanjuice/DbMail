@@ -23,6 +23,7 @@ async function sendMail(req, res) {
         return;
     }
     const newMail = new mailModel({
+        fromMail: req.user.email,
         from: req.user.id,
         to: user,
         body: req.body.body,
