@@ -5,17 +5,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fmail</title>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+            background-color: #8abe5390;
+        }
+
+        form {
+            margin-top: 5%;
+        }
+
+        input {
+            padding: 15px 50px;
+            border: none;
+            font-size: 14px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 50px;
+            background-color: #4D7E3E;
+            border: none;
+            border: 1px solid black;
+        }
+
+        button:hover {
+            background-color: #8ABE53;
+        }
+
+        img {
+            width: 300px;
+        }
+
+        td {
+            text-align: left;
+        }
+
+        #email-entry input{
+            padding-left: 1px;
+            margin-right: 0px;
+        }
+        
+    </style>
+    <!-- #4D7E3E
+#C6E0BD
+#4D7E3E
+#72ac78
+#4D7E3E
+#8ABE53 -->
 </head>
 
 <body>
     <form>
-        <label for="email">Email</label>
-        <input type="email" id="email">
+
+        <img src="./assets/logo.png" alt="">
 
         <br><br>
 
-        <label for="password">Password</label>
-        <input type="password" id="password">
+        <h1 style="color: #4D7E3E; font-family: monospace;">LOGIN</h1>
+
+        <br><br>
+
+        <center>
+            <table>
+                <tr>
+                    <td>
+                        <label for="email">Email</label>
+                    </td>
+                    <td id="email-entry">
+                        <input type="email" id="email">
+                        <input type="email" id="email" value="@fmail.com" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="password">Password</label>
+                    </td>
+                    <td>
+                        <input type="password" id="password">
+                    </td>
+                </tr>
+            </table>
+        </center>
+        <br><br>
 
         <button type="button" onclick="loginUser()">Login</button>
     </form>
@@ -41,6 +120,9 @@
             const data = await response.json();
             if (data.status) {
                 alert("Success")
+                console.log(response.headers.get('x-jwtoken'))
+                sessionStorage.setItem("token", response.headers.get('x-jwtoken'));
+                window.location.href = "./main.html"
             }
             else {
                 alert("Invalid Credentials");

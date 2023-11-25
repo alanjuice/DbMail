@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fmail</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+
+        .sidenav {
+            height: 100vh;
+            width: 200px;
+            background-color: #C6E0BD;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 1px solid black;
+            z-index: 1;
+
+
+        }
+
+        .sidenav img {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .sidenav button {
+            margin-top: 20px;
+            border: none;
+            background-color: #72ac78;
+            padding: 10px;
+            width: 80%;
+        }
+
+        .sidenav button:hover {
+            background-color: #8ABE53;
+        }
+
+        .body {
+            flex: 1;
+            padding: 20px;
+            background-color: #72ac78;
+        }
+
+        .mail {
+            border: 2px solid red;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        tr {
+            background-color: #C6E0BD;
+            height: 40px;
+        }
+
+        td {
+            padding-left: 20px;
+        }
+
+
+        tr:not(#heading):hover td {
+            border: 2px solid red;
+            border-collapse: collapse;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="sidenav">
+        <img src="../client/assets/logo.png" alt="">
+        <button>Mails</button>
+        <button>Sent</button>
+        <button onclick="window.location.href='./send.html'">Send Mail</button>
+    </div>
+    <div class="body">
+
+    </div>
+
+    <script>
+
+        const mailTable = document.createElement("table");
+        mailTable.innerHTML += `<tr id="heading"><td>No</td><td>From</td><td>Subject</td></tr>`
+
+        var data;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            getMails();
+        });
+
+        async function getMails() {
+            try {
+                const response = await fetch("http://localhost:3000/getMails", {
+                    method: 'GET',
+                    headers: { 'x-jwtoken': sessionStorage.getItem("token") }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                data = await response.json();
+                console.log(data);
+
+                const bodyElement = document.querySelector('.body');
+
+                bodyElement.innerHTML = '';
+
+                data.mails.forEach(mail => setMail(mail, data.mails.indexOf(mail)));
+                bodyElement.appendChild(mailTable);
+            } catch (error) {
+                console.error('Error fetching mails:', error);
+            }
+
+
+        }
+
+        function setMail(mail, number) {
+
+            const tableRow = document.createElement("tr");
+            const values = ["fromMail", "subject"];
+
+            tableRow.innerHTML += `<td>${number + 1}</td>`;
+
+            for (var i = 0; i < 2; i++) {
+                let itemMail = document.createElement("td");
+                itemMail.textContent = mail[values[i]];
+                tableRow.appendChild(itemMail);
+
+            }
+            tableRow.addEventListener("click", () => viewMail(tableRow.firstChild.textContent - 1, tableRow));
+
+
+            mailTable.appendChild(tableRow);
+        }
+
+
+        function viewMail(mailNo) {
+            const mailData = data.mails[mailNo];
+            alert(mailData.body)
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fmail</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+            background-color: #8abe5390;
+        }
+
+        form {
+            margin-top: 5%;
+        }
+
+        input {
+            padding: 15px 50px;
+            border: none;
+            font-size: 14px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 50px;
+            background-color: #4D7E3E;
+            border: none;
+            border: 1px solid black;
+        }
+
+        button:hover {
+            background-color: #8ABE53;
+        }
+
+        img {
+            width: 300px;
+        }
+
+        td {
+            text-align: left;
+        }
+
+        #email-entry input {
+            padding-left: 1px;
+            margin-right: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <label for="to">To</label>
+        <input type="email" id="to">
+
+        <br><br>
+
+        <label for="subject">Subject</label>
+        <input type="text" id="subject">
+
+        <br><br>
+
+        <label for="body">Body</label>
+        <textarea id="body"></textarea>
+
+        <br><br>
+
+        <button type="button" onclick="sendMail()">Send</button>
+
+
+    </form>
+
+    <script>
+        async function sendMail() {
+            const to = document.getElementById("to").value;
+            const body = document.getElementById("body").value;
+            const subject = document.getElementById("subject").value;
+            const req = (JSON.stringify({
+                to: to,
+                subject: subject,
+                body: body
+            }));
+            console.log(req)
+            const response = await fetch("http://localhost:3000/sendMail", {
+                method: 'POST',
+                body: req,
+                headers: {
+                    'Content-Type': 'application/json',
+                    "x-jwtoken": sessionStorage.getItem("token")
+                }
+            });
+
+            const data = await response.json();
+            console.log(data);
+        }
+    </script>
+
+</body>
+
+</html>

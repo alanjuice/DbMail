@@ -5,30 +5,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fmail</title>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+            background-color: #8abe5390;
+        }
+
+        form {
+            margin-top: 5%;
+        }
+
+        input {
+            padding: 15px 50px;
+            border: none;
+            font-size: 14px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 50px;
+            background-color: #4D7E3E;
+            border: none;
+            border: 1px solid black;
+        }
+
+        button:hover {
+            background-color: #8ABE53;
+        }
+
+        img {
+            width: 300px;
+        }
+
+        td {
+            text-align: left;
+        }
+
+        #email-entry input {
+            padding-left: 1px;
+            margin-right: 0px;
+        }
+    </style>
 </head>
 
 <body>
+
     <form>
 
-        <label for="fname">First Name</label>
-        <input type="text" id="fname">
+        <img src="./assets/logo.png" alt="">
 
         <br><br>
 
-        <label for="lname">Last Name</label>
-        <input type="text" id="lname">
+        <h1 style="color: #4D7E3E; font-family: monospace;">REGISTER</h1>
 
         <br><br>
 
-        <label for="email">Email</label>
-        <input type="email" id="email">
+        <center>
+            <table>
+                <tr>
+                    <td>
+                        <label for="fname">First Name</label>
+                    </td>
+                    <td>
+                        <input type="text" id="fname">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><br></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="lname">Last Name</label>
+                    </td>
+                    <td>
+                        <input type="text" id="lname">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><br></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="email">Email</label>
+                    </td>
+                    <td>
+                        <input type="email" id="email">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><br></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="password">Password</label>
+                    </td>
+                    <td>
+                        <input type="password" id="password">
+                    </td>
+                </tr>
+            </table>
+
+            <br><br><br>
+
+            <button type="button" onclick="registerUser()">Register</button>
+        </center>
 
         <br><br>
 
-        <label for="password">Password</label>
-        <input type="password" id="password">
 
-        <button type="button" onclick="registerUser()">Register</button>
+        
     </form>
 
     <script>
