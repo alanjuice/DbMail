@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("", userRouter);
 app.use("", mailRouter);
 app.use(morgan('tiny'));
-app.use(express.static('public'));
+app.use(express.static('public/client'));
 
 //For testing purposes
 app.get("/health", (req, res) => {
