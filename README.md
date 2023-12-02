@@ -1,2 +1,2 @@
 # fmail
-A simple and fast mail service provider
+A database based mail application
