@@ -9,6 +9,14 @@ async function getMails(req, res) {
     res.json({ status: true, mails: mails })
 }
 
+async function getSentMails(req, res) {
+    //to get all mails of the authorized user
+
+    console.log("Getting mails..");
+    const mails = await mailModel.find({ "from": req.user.id });
+    res.json({ status: true, mails: mails })
+}
+
 async function sendMail(req, res) {
     //to send a mail to an existing email from an authorized user
 
@@ -34,4 +42,4 @@ async function sendMail(req, res) {
     res.json({ status: true, msg: "Mail sent" })
 }
 
-module.exports = { getMails, sendMail };
+module.exports = { getMails, sendMail, getSentMails };
