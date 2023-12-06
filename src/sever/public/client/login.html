@@ -43,19 +43,7 @@
         td {
             text-align: left;
         }
-
-        #email-entry input{
-            padding-left: 1px;
-            margin-right: 0px;
-        }
-        
     </style>
-    <!-- #4D7E3E
-#C6E0BD
-#4D7E3E
-#72ac78
-#4D7E3E
-#8ABE53 -->
 </head>
 
 <body>
@@ -72,12 +60,9 @@
         <center>
             <table>
                 <tr>
-                    <td>
-                        <label for="email">Email</label>
-                    </td>
+
                     <td id="email-entry">
-                        <input type="email" id="email">
-                        <input type="email" id="email" value="@fmail.com" disabled>
+                        <input type="email" id="email" placeholder="Email">
                     </td>
                 </tr>
                 <tr>
@@ -86,10 +71,7 @@
 
                 <tr>
                     <td>
-                        <label for="password">Password</label>
-                    </td>
-                    <td>
-                        <input type="password" id="password">
+                        <input type="password" id="password" placeholder="Password">
                     </td>
                 </tr>
             </table>
@@ -119,13 +101,13 @@
 
             const data = await response.json();
             if (data.status) {
-                alert("Success")
+                alert("Login Success")
                 console.log(response.headers.get('x-jwtoken'))
                 sessionStorage.setItem("token", response.headers.get('x-jwtoken'));
                 window.location.href = "./main.html"
             }
             else {
-                alert("Invalid Credentials");
+                alert(data.msg);
             }
         }
     </script>

@@ -83,9 +83,7 @@
 
 <body>
     <div class="sidenav">
-        <img src="../client/assets/logo.png" alt="">
-        <button type="button" onclick="getMailsAll(1)">Mails</button>
-        <button type="button" onclick="getMailsAll(0)">Sent</button>
+        <img src="./assets/logo.png" alt="">
         <button onclick="window.location.href='./send.html'">Send Mail</button>
     </div>
     <div class="body">
@@ -99,33 +97,17 @@
 
         var data;
 
-        document.addEventListener("DOMContentLoaded", function () {
-            getMails("http://localhost:3000/getMails");
-        });
+        document.addEventListener("DOMContentLoaded",
+            getMails()
+        );
 
 
-        function getMailsAll(value) {
-            const bodyElement = document.querySelector('.body');
-            bodyElement.children[0].innerHTML = "<tr id='heading'><td>No</td><td>From</td><td>Subject</td></tr>";
-            if (value == 1)
-                getMails("http://localhost:3000/getMails")
-            else
-                getMails("http://localhost:3000/getSentMails")
-
-
-        }
-
-
-        async function getMails(url) {
+        async function getMails() {
             try {
-                const response = await fetch(url, {
+                const response = await fetch("http://localhost:3000/getMails", {
                     method: 'GET',
                     headers: { 'x-jwtoken': sessionStorage.getItem("token") }
                 });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
 
                 data = await response.json();
                 console.log(data);
@@ -169,7 +151,6 @@
 
         }
     </script>
-    <script src="../client/scripts/popup.js"></script>
 </body>
 
 </html>

@@ -21,12 +21,12 @@ async function userLogin(req, res) {
         });
         return;
     }
-    console.log(email);
+
     const user = await userModel.findOne({ "email": email });
     if (!user) {
         res.json({
             status: false,
-            msg: "email doesnt exist"
+            msg: "Email doesn't exist"
         });
         return;
     }
@@ -40,7 +40,7 @@ async function userLogin(req, res) {
             return;
         }
     }
-
+    //Temp secret
     res.set("x-jwtoken", jwt.sign({ id: user._id, email: user.email }, "pkey"))
     res.json({
         status: true,

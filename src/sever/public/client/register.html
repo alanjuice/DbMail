@@ -67,10 +67,7 @@
             <table>
                 <tr>
                     <td>
-                        <label for="fname">First Name</label>
-                    </td>
-                    <td>
-                        <input type="text" id="fname">
+                        <input type="text" id="fname" placeholder="First Name">
                     </td>
                 </tr>
 
@@ -79,11 +76,9 @@
                 </tr>
 
                 <tr>
+
                     <td>
-                        <label for="lname">Last Name</label>
-                    </td>
-                    <td>
-                        <input type="text" id="lname">
+                        <input type="text" id="lname" placeholder="Last Name">
                     </td>
                 </tr>
 
@@ -92,11 +87,9 @@
                 </tr>
 
                 <tr>
+
                     <td>
-                        <label for="email">Email</label>
-                    </td>
-                    <td>
-                        <input type="email" id="email">
+                        <input type="email" id="email" placeholder="Email">
                     </td>
                 </tr>
 
@@ -105,11 +98,9 @@
                 </tr>
 
                 <tr>
+
                     <td>
-                        <label for="password">Password</label>
-                    </td>
-                    <td>
-                        <input type="password" id="password">
+                        <input type="password" id="password" placeholder="Password">
                     </td>
                 </tr>
             </table>
@@ -122,7 +113,7 @@
         <br><br>
 
 
-        
+
     </form>
 
     <script>
@@ -151,10 +142,11 @@
 
             const data = await response.json();
             if (data.status) {
-                alert("Success")
+                alert("Register Successful")
+                window.location.href = "./login.html"
             }
             else {
-                alert("Invalid Field");
+                alert(data.msg);
             }
         }
     </script>
