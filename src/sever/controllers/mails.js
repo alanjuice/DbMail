@@ -55,4 +55,16 @@ async function sendMail(req, res) {
     res.json({ status: true, msg: "Mail sent" })
 }
 
-module.exports = { getMails, sendMail, getSentMails };
+async function deleteMail(req, res) {
+    //to delete a mail recieved by user
+    //Needs the mail id and user token in header
+
+    const response = await mailModel.findOneAndDelete({ _id: req.body.id, to: req.user.id });
+
+    if (response)
+        res.json({ status: true, msg: "Mail Deleted" });
+    else
+        res.json({ status: false, msg: "Mail Doesn't Exist" });
+}
+
+module.exports = { getMails, sendMail, getSentMails, deleteMail };
